@@ -32,6 +32,10 @@ gem 'mailboxer'
 # Avatars
 gem 'gravatar_image_tag'
 
+# SMS Notifications
+gem 'phone'
+gem 'twilio-ruby', '~> 4.11.1'
+
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -60,4 +64,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
