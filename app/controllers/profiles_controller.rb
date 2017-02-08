@@ -6,6 +6,10 @@ class ProfilesController < AuthenticatedController
   end
 
   def update
+    # Operate on a copy
+    @profile = Member.to_adapter.get!(@profile.to_key)
+
+
     if profile_params['password'].empty?
       success = @profile.update_without_password(profile_params)
     else
@@ -13,6 +17,7 @@ class ProfilesController < AuthenticatedController
     end
 
     if success
+      bypass_sign_in @profile
       redirect_to member_path(@profile)
     else
       render 'edit'
