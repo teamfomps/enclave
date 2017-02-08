@@ -1,3 +1,4 @@
+@import "bootstrap-sprockets";
 @import 'bootstrap';
 @import 'bootstrap/theme';
 
@@ -9,3 +10,16 @@
 @import "authenticated";
 @import "mailboxer";
 @import "footer";
+
+.number-badge {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  padding: 1px 4px;
+  background-color: #a00;
+  line-height: 1em;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: normal;
+  font-size: 0.9em;
+}

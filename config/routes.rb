@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :members
+  resources :applicants, only: [:index, :show, :update, :delete]
   resources :members, only: [:index, :show]
 
   unauthenticated :member do

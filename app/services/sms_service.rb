@@ -7,7 +7,7 @@ class SMSService
     client.messages.create(
       from: ENV['TWILIO_FROM_NUMBER'],
       to: parsed_number.format(:default),
-      body: body
+      body: "The Enclave: " + body
     )
   end
 end

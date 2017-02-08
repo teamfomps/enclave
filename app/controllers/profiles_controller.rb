@@ -17,7 +17,7 @@ class ProfilesController < AuthenticatedController
     end
 
     if success
-      bypass_sign_in @profile
+      bypass_sign_in @profile # don't force the user to sign in again
       redirect_to member_path(@profile)
     else
       render 'edit'

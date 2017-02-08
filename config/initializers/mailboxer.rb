@@ -19,4 +19,4 @@ Mailboxer.setup do |config|
   config.body_max_length = 32000
 end
 
-# Mailboxer::Message.on_deliver -> (x) { binding.pry }
+Mailboxer::Message.on_deliver -> (msg) { NotificationService.process_private_message_notifications(msg) }
