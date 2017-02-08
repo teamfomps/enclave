@@ -1,0 +1,85 @@
+- page_header 'Edit Profile and Settings'
+
+.row
+  .col-sm-8
+    = form_for @profile, url: profile_path do |f|
+
+      - if @profile.errors.any?
+        .alert.alert-danger{ role: 'alert' }
+          %ul
+            - @profile.errors.full_messages.each do |msg|
+              %li
+                = msg
+
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Forum Identity
+        .panel-body
+          .form-group
+            = f.label :first_name
+            = f.text_field :first_name, class: 'form-control'
+          .form-group
+            = f.label :last_name
+            = f.text_field :last_name, class: 'form-control'
+
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Email Address
+        .panel-body
+          .form-group
+            = f.label :email
+            = f.email_field :email, class: 'form-control'
+            %p.help-block
+              You need your email address to sign into the forum and to
+              reset your password if you forget it.
+
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Mobile Phone
+        .panel-body
+          .form-group
+            = f.label :mobile_number
+            = f.phone_field :mobile_number, class: 'form-control'
+            %p.help-block
+              You don't need to provide this to use Forum 2.0, but if you do, we
+              can send you text messages when you get a private message.
+
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Notifications
+        .panel-body
+          .form-group
+            %label
+              = f.check_box :receives_email_notifications
+              Receive notifications by email.
+          .form-group
+            %label
+              = f.check_box :receives_sms_notifications
+              Receive notifications by text message.
+
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Password
+        .panel-body
+          .form-group
+            = f.label :password
+            = f.password_field :password, class: 'form-control'
+            %span.help-block
+              Leave this blank unless you want to change your password.
+          #password-confirmation-group.form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, class: 'form-control'
+            %span.help-block
+              If you're changing your password, type the new password again to make sure
+              you didn't mistype it the first time.
+
+      .form-group
+        = f.submit 'Save Changes', class: 'btn btn-primary'
+  .col-sm-4
+    .hidden-xs
+      = image_tag gravatar_image_url(@profile.email, size: 512), title: @profile.full_name, class: 'img-rounded img-responsive'
+      %br
+      .well
+        For the time being, you'll need to use
+        = link_to 'Gravatar', 'https://en.gravatar.com/'
+        to set your Forum 2.0 avatar.

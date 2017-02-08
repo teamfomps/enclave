@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     root to: 'frontpage#index', as: 'authenticated_root'
   end
 
+  # Profile Stuff
+  resource :profile, only: [:edit, :update, :show]
+
   # Mailboxer messages
   resources :conversations, only: [:index, :show, :destroy] do
     member do

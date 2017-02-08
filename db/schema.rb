@@ -90,9 +90,6 @@ ActiveRecord::Schema.define(version: 20170207023628) do
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.string   "mobile_number"
-    t.string   "unconfirmed_mobile_number"
-    t.string   "mobile_confirmation_pin"
-    t.datetime "mobile_confirmed_at"
     t.boolean  "receives_email_notifications", default: false,       null: false
     t.boolean  "receives_sms_notifications",   default: false,       null: false
     t.index ["confirmation_token"], name: "index_members_on_confirmation_token", unique: true, using: :btree
