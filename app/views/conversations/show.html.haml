@@ -3,7 +3,6 @@
 .row
   .col-xs-6
     %p
-      Chatting with
       \#{render 'conversations/participants', conversation: @conversation}
   .col-xs-6{style: 'text-align: right;'}
     = link_to 'Move to trash', conversation_path(@conversation), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'}
