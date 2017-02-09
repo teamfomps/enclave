@@ -60,6 +60,11 @@
     .container
       - flash.each do |type, message|
         = alert_box message, context: flash_context(type), dismissible: true unless message.blank?
+
+      .row
+        .col-md-12
+          = render 'layouts/breadcrumbs', breadcrumbs: @breadcrumbs
+
       .row
         .col-md-12
           %h1

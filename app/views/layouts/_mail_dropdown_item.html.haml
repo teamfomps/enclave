@@ -2,4 +2,7 @@
   = link_to conversation_path(conversation) do
     %h5
       = recipients
+      - if conversation.is_unread? current_member
+        %span.badge
+          unread
     = truncate(body, length: 50)

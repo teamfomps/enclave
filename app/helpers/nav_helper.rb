@@ -18,7 +18,7 @@ module NavHelper
   end
 
   def mailbox_conversations
-    current_member.mailbox.inbox
+    current_member.mailbox.inbox.limit(5)
   end
 
   def unseen_message_count
@@ -30,7 +30,8 @@ module NavHelper
     recipients = recipients.map(&:full_name).join(', ')
     vars = {conversation: conversation,
             recipients:   recipients,
-            body:         conversation.messages.last.body}
+            # body:         conversation.messages.last.body}
+            body:         conversation.subject}
     render 'layouts/mail_dropdown_item', vars
   end
 end

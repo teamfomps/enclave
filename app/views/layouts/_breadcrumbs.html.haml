@@ -1,0 +1,7 @@
+- unless breadcrumbs.empty?
+  %ol.breadcrumb
+    %li
+      = link_to 'Home', '/'
+    - breadcrumbs.each do |b|
+      %li
+        = link_to b.title, b.path

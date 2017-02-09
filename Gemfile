@@ -43,6 +43,7 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'faker'
 end
 
 group :development do

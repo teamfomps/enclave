@@ -16,6 +16,7 @@ class ConversationsController < AuthenticatedController
   end
 
   def show
+    push_breadcrumb @conversation.subject.truncate(20), conversation_path(@conversation)
     @conversation.mark_as_read(current_member)
   end
 
@@ -31,23 +32,9 @@ class ConversationsController < AuthenticatedController
     redirect_to conversations_path
   end
 
-  def mark_as_read
-    @conversation.mark_as_read(current_member)
-    flash[:success] = 'The conversation was marked as read.'
-    redirect_to conversations_path
-  end
-
   def restore
     @conversation.untrash(current_member)
     flash[:success] = 'The conversation was restored.'
-    redirect_to conversations_path
-  end
-
-  def empty_trash
-    @mailbox.trash.each do |conversation|
-      conversation.receipts_for(current_member).update_all(deleted: true)
-    end
-    flash[:success] = 'Your trash was cleaned!'
     redirect_to conversations_path
   end
 
@@ -66,5 +53,9 @@ class ConversationsController < AuthenticatedController
       params[:box] = 'inbox'
     end
     @box = params[:box]
+  end
+
+  def initialize_breadcrumbs
+    push_breadcrumb('Private Messages', conversations_path)
   end
 end

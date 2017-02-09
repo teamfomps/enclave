@@ -5,5 +5,12 @@ class MembersController < AuthenticatedController
 
   def show
     @member = Member.find(params[:id])
+    push_breadcrumb @member.full_name, member_path(@member)
+  end
+
+  private
+
+  def initialize_breadcrumbs
+    push_breadcrumb 'Member Directory', members_path
   end
 end

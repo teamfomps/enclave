@@ -10,7 +10,7 @@ def create_member(opts = {})
   Member.create!(attributes)
 end
 
-create_member(
+stephen = create_member(
   first_name: 'Stephen',
   last_name: 'Van Dahm',
   handle: 'stephen',
@@ -18,7 +18,7 @@ create_member(
   role: :admin,
 )
 
-create_member(
+nelson = create_member(
   first_name: 'Chris',
   last_name: 'Nelson',
   handle: 'fomps',
@@ -26,7 +26,7 @@ create_member(
   role: :admin,
 )
 
-create_member(
+joe = create_member(
   first_name: 'Joe',
   last_name: 'Juba',
   handle: 'joe',
@@ -34,10 +34,18 @@ create_member(
   role: 'member',
 )
 
-create_member(
+pj = create_member(
   first_name: 'PJ',
   last_name: 'Jabhouse',
   handle: 'pj.jabhouse',
   email: 'pj@example.com',
   role: 'applicant',
 )
+
+# Create Some Private Messages
+
+5.times do
+  joe.send_message([stephen], Faker::Hipster.paragraphs(2).join("\n\n"), Faker::Hipster.sentence(8))
+  stephen.send_message([nelson], Faker::Hipster.paragraphs(2).join("\n\n"), Faker::Hipster.sentence(8))
+end
+

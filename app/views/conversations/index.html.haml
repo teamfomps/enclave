@@ -1,17 +1,19 @@
-- page_header "Your Conversations"
-%p
-  = link_to 'Start conversation', new_message_path, class: 'btn btn-lg btn-primary'
+- page_header "Private Messages"
 
 .row
   .col-sm-3
-    %ul.nav.nav-pills.nav-stacked
-      = mailbox_section 'inbox', @box
-      = mailbox_section 'sent', @box
-      = mailbox_section 'trash', @box
-  .col-sm-9
-    - if @box == 'trash'
-      %p= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete, |
-          data: {confirm: 'Are you sure?'}                                                                 |
+    %p
+      = link_to 'New Conversation', new_message_path, class: 'btn btn-primary btn-block'
+    %br
 
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Mailboxes
+      .panel-body
+        %ul.nav.nav-pills.nav-stacked
+          = mailbox_section 'inbox', @box
+          = mailbox_section 'sent', @box
+          = mailbox_section 'trash', @box
+  .col-sm-9                                                               |
     %ul.list-group= render partial: 'conversations/conversation', collection: @conversations
     = will_paginate
