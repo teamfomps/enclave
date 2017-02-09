@@ -26,9 +26,6 @@
             = navigation_tab 'discussions' do
               = link_to root_path, class: 'active' do
                 Discussions
-            = navigation_tab 'conversations' do
-              = link_to conversations_path do
-                Mail
             = navigation_tab 'members' do
               = link_to 'Members', members_path
             = navigation_tab 'search' do
@@ -37,25 +34,15 @@
           %ul.nav.navbar-nav.navbar-right
             %li.dropdown
               %a.dropdown-toggle{ href: '#', 'data-toggle' => 'dropdown', role: 'button', 'aria-expanded' => 'false' }
-                Notifications
-                %span.number-badge
-                  = unseen_notifications_count
+                %span{ class: 'glyphicon glyphicon-inbox' }
+                = number_badge(unseen_message_count)
               %ul.dropdown-menu
+                - mailbox_conversations.each do |conversation|
+                  = mail_dropdown_item(conversation)
+                - if mailbox_conversations.count > 0
+                  %li.divider
                 %li
-                  = link_to '#' do
-                    %h5
-                      Andrew, Ryan
-                    You need to start getting drunk and shit...
-
-                %li
-                  = link_to '#' do
-                    %h5
-                      Joe Juba
-                    Butts butts butts butts...
-
-                %li.divider
-                %li
-                  = link_to 'All messages', '#'
+                  = link_to 'All messages', conversations_path
 
             %li.dropdown
               %a.dropdown-toggle{ href: '#', 'data-toggle' => 'dropdown', role: 'button', 'aria-expanded' => 'false' }

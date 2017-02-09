@@ -15,6 +15,10 @@ class ConversationsController < AuthenticatedController
     @conversations = @conversations.paginate(page: params[:page], per_page: 10)
   end
 
+  def show
+    @conversation.mark_as_read(current_member)
+  end
+
   def reply
     current_member.reply_to_conversation(@conversation, params[:body])
     flash[:success] = 'Reply sent'

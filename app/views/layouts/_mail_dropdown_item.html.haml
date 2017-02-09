@@ -1,0 +1,5 @@
+%li
+  = link_to conversation_path(conversation) do
+    %h5
+      = recipients
+    = truncate(body, length: 50)
