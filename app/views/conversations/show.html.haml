@@ -5,12 +5,12 @@
     %p
       \#{render 'conversations/participants', conversation: @conversation}
   .col-xs-6{style: 'text-align: right;'}
-    = link_to 'Move to trash', conversation_path(@conversation), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'}
+    = link_to 'Move to trash', conversation_path(@conversation), class: 'btn btn-danger btn-sm', method: :delete, data: {confirm: 'Are you sure?'}
 .panel.panel-default
   .panel-heading= @conversation.subject
   .panel-body
     .messages
-      - @conversation.receipts_for(current_member).each do |receipt|
+      - @conversation.receipts_for(current_member).order('created_at ASC').each do |receipt|
         .media
           - message = receipt.message
           .media-left
