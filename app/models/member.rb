@@ -9,7 +9,11 @@ class Member < ApplicationRecord
          :validatable,
          :confirmable
 
-  enumerize :role, in: [:applicant, :member, :admin], default: :applicant
+  enumerize :role, in: [:applicant, :member, :admin, :sock_puppet], default: :applicant
+
+  scope :active, -> { where(role: ['member', 'admin']) }
+  scope :sock_puppets, -> { where(role: 'sock_puppet') }
+  scope :applicants, -> { where(role: 'applicant') }
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -19,12 +23,26 @@ class Member < ApplicationRecord
   before_create :set_handle
 
   def full_name
+    return handle if role.sock_puppet?
     [first_name, last_name].join(' ')
   end
 
   protected
 
+  def generate_handle
+    candidate = full_name.sub('.', ' ').gsub(/\s+/, '.').downcase
+    return candidate unless Member.exists?(handle: candidate)
+
+    counter = 2
+    while Member.exists?(handle: "#{candidate}.#{counter}")
+      counter += 1
+    end
+
+    "#{candidate}.#{counter}"
+  end
+
   def set_handle
-    self.handle = full_name.sub('.', ' ').gsub(/\s+/, '.').downcase
+    return if handle
+    self.handle = generate_handle
   end
 end

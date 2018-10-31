@@ -1,3 +1,15 @@
 - page_header 'Discussions'
 
-<p>I haven't even started writing this yet.</p>
+.row
+  .col-md-3
+    %p
+      = link_to 'Start a new discussion', new_discussion_path, class: 'btn btn-primary btn-block'
+    .panel.panel-default
+      .panel-heading
+        Events
+      .panel-body
+        none
+  .col-md-9
+    %ul.list-group
+      = render @discussions
+    = will_paginate @discussions

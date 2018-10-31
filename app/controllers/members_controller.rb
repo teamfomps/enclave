@@ -1,6 +1,7 @@
 class MembersController < AuthenticatedController
   def index
-    @members = Member.all.order('last_name ASC')
+    @members = Member.active.order('last_name ASC')
+    @sock_puppets = Member.sock_puppets.order('handle ASC')
   end
 
   def show

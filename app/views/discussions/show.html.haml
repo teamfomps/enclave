@@ -1,0 +1,11 @@
+= page_header @discussion.name
+
+.row
+  .col-md-3
+    %p
+      = link_to 'Start a new discussion', class: 'btn btn-primary btn-block'
+
+  .col-md-9
+    %ul.list-group
+      = render @comments
+    = will_paginate (@comments)

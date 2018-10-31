@@ -1,0 +1,24 @@
+.user-content {
+  font-size: 16px;
+  font-family: $font-family-serif;
+  line-height: 24px;
+  max-width: 40em;
+
+  blockquote {
+    font-size: 1em;
+    font-style: italic;
+    color: $gray;
+    margin-left: 2em;
+    border-left: 0;
+
+    em {
+      font-style: normal;
+    }
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto 0 auto;
+  }
+}

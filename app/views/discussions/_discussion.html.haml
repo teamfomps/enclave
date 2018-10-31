@@ -1,0 +1,28 @@
+%li.list-group-item
+  %h4
+    = link_to discussion.name, discussion_path(discussion)
+  .row
+    .col-md-4.small
+      %strong
+        Category:
+      = link_to discussion.category.name, category_path(discussion.category)
+    .col-md-4.small
+      %strong
+        Started by:
+      = link_to discussion.member.handle, member_path(discussion.member)
+    .col-md-4.small
+      %strong
+        Comments:
+      = discussion.comment_count
+  .row
+    .col-md-4.small
+      %strong
+        Last comment by
+      = link_to discussion.member.handle, member_path(discussion.member)
+    .col-md-4.small
+      %strong
+        Last active
+      14 hours ago
+    .col-md-4.small
+      %strong New
+      0

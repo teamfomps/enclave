@@ -1,0 +1,16 @@
+%li.list-group-item
+  .media
+    .media-left
+      = gravatar_for comment.member, 60, comment.member.full_name
+    .media-body
+      %h4
+        = link_to comment.member.handle, member_path(comment.member), title: comment.member.full_name
+        %span.small
+          = time_ago_in_words comment.created_at
+          ago
+    %br
+    .user-content
+      = comment.render
+    %p
+      = link_to '#', class: 'btn btn-default btn-xs' do
+        %span.glyphicon.glyphicon-thumbs-up

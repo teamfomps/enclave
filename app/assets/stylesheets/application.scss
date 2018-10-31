@@ -1,9 +1,13 @@
 @import "bootstrap-sprockets";
-@import 'bootswatch/flatly/variables';
+//@import 'bootswatch/united/variables';
+@import 'fonts';
+@import 'variables';
 @import 'bootstrap';
-@import 'bootstrap/theme';
+//@import 'bootstrap/theme';
 
 @import "unauthenticated";
+
+@import 'typography';
 
 // Main application stuff
 @import "chosen";

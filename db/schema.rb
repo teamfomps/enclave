@@ -10,10 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207023628) do
+ActiveRecord::Schema.define(version: 20170219102856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",                     null: false
+    t.text     "description", default: "", null: false
+    t.integer  "priority",                 null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "discussion_id"
+    t.integer  "member_id"
+    t.text     "body",          null: false
+    t.string   "format"
+    t.boolean  "is_deleted"
+    t.datetime "deleted_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["discussion_id"], name: "index_comments_on_discussion_id", using: :btree
+    t.index ["member_id"], name: "index_comments_on_member_id", using: :btree
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "member_id"
+    t.string   "name",                             null: false
+    t.integer  "comment_count",    default: 0,     null: false
+    t.integer  "first_comment_id"
+    t.boolean  "is_active",        default: true,  null: false
+    t.boolean  "is_closed",        default: false, null: false
+    t.boolean  "is_sticky",        default: false, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["category_id"], name: "index_discussions_on_category_id", using: :btree
+    t.index ["member_id"], name: "index_discussions_on_member_id", using: :btree
+  end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.string  "unsubscriber_type"
@@ -92,6 +128,11 @@ ActiveRecord::Schema.define(version: 20170207023628) do
     t.string   "mobile_number"
     t.boolean  "receives_email_notifications", default: false,       null: false
     t.boolean  "receives_sms_notifications",   default: false,       null: false
+    t.integer  "discussion_count",             default: 0,           null: false
+    t.integer  "comment_count",                default: 0,           null: false
+    t.datetime "last_active_at"
+    t.datetime "last_created_discussion_at"
+    t.datetime "last_created_comment_at"
     t.index ["confirmation_token"], name: "index_members_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_members_on_email", unique: true, using: :btree
     t.index ["handle"], name: "index_members_on_handle", unique: true, using: :btree

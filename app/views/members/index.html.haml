@@ -1,7 +1,14 @@
 = page_header 'Member Directory'
 .row
   .col-md-12
+    %h3 Active Members
     %ul
       - @members.each do |member|
         %li
           = link_to member.full_name, member_path(member)
+
+    %h3 Hall of Shame
+    %ul
+      - @sock_puppets.each do |member|
+        %li
+          = link_to member.handle, member_path(member)
