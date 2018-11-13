@@ -1,4 +1,4 @@
-ruby '2.5.1'
+ruby '2.5.3'
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.2.1'
@@ -42,6 +42,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 
 group :development, :test do
+  # OpenBSD needs this. We won't be running OpenBSD in production, though.
+  require 'rbconfig'
+  if RbConfig::CONFIG['target_os'] =~ /(?i-mx:bsd|dragonfly)/
+    gem 'rb-kqueue', '>= 0.2'
+  end
+
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'faker'
@@ -69,3 +75,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
